@@ -1,0 +1,33 @@
+body {
+    padding: 1rem;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+#content {
+    display: flex;
+}
+
+div#calcul, div#rappel, div#horaire {
+    margin: 1rem;
+    padding: 2rem;
+    border: 1px dotted;
+}
+
+
+@media only screen and (max-device-width: 768px){
+    #content {
+        display: table;
+    }
+    div#calcul, div#rappel, div#horaire  {
+        margin: 0.25rem;
+        padding: 0.5rem;
+        border: 1px dotted;
+    }
+}
+
+td#table_fin_epreuve, td#table_fin_epreuve_tiers_temps {
+    background-color: #e0ffdf;
+}
+.surbrillance {
+    background-color: gold !important;
+}

@@ -1,89 +1,212 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset='utf-8'>
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <title>TIERS TEMPS</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <script>
-            function calculduree() {
-                var duree = document.getElementById("duree_epreuve").value;
-                var heure = document.getElementById("heure_epreuve").value;
+<!-- Aucune protection -->
 
-                var duree_epreuve_min = (parseInt(duree.split(":")[0])*60) + parseInt(duree.split(":")[1]);
-                var duree_epreuve_tiers_duree_min = Math.round(duree_epreuve_min*(1/3));
 
-                var heure_epreuve_min = (parseInt(heure.split(":")[0])*60) + parseInt(heure.split(":")[1]);
-                var heure_epreuve_fin = heure_epreuve_min + duree_epreuve_min
-                var heure_epreuve_tiers_duree_fin = heure_epreuve_min + duree_epreuve_min + duree_epreuve_tiers_duree_min
-                
-                document.getElementById("duree_epreuve_minutes").innerHTML = " === " + duree_epreuve_min+" minutes";
-                document.getElementById("table_tiers_duree").innerHTML = duree_epreuve_tiers_duree_min + " minutes";
-                document.getElementById("table_duree_epreuve_tiers_duree").innerHTML = duree_epreuve_min + duree_epreuve_tiers_duree_min + " minutes";
-                document.getElementById("table_fin_epreuve").innerHTML = (Math.round(heure_epreuve_fin)-Math.round(heure_epreuve_fin%60))/60 + ":" + rectMinutes(Math.round(heure_epreuve_fin%60));
-                document.getElementById("table_fin_epreuve_tiers_duree").innerHTML = (Math.round(heure_epreuve_tiers_duree_fin)-Math.round(heure_epreuve_tiers_duree_fin%60))/60 + ":" + rectMinutes(Math.round(heure_epreuve_tiers_duree_fin%60));
-            }
-
-            var hms = '13:30';
-            var a = hms.split(':');
-
-            var seconds = (+a[0]) * 60 * 60 + (+a[1]); 
-
-            console.log(seconds);
-
-            // 43200
-            // 46830
-
-            function rectMinutes(value) {
-                if (value.length == 1) {
-                    return "0"+value;
-                }
-                if (value == 0) {
-                    return "00";
-                }
-                return value;
-            }
-        </script>
-    </head>
-    <body onload="calculduree()">
-        <h1>Calcul Tiers temps</h1>
-        <p>
-            <label for="heure_epreuve">Heure de début d'épreuve:</label>
-            <input type="time" id="heure_epreuve" value="08:00" name="heure_epreuve" required onchange="calculduree()">
-        </p>
-        <p>
-            <label for="duree_epreuve">Durée d'épreuve:</label>
-            <input type="time" id="duree_epreuve" value="04:00" name="duree_epreuve" required onchange="calculduree()"><a> heure(s)</a>
-            <a id="duree_epreuve_minutes"></a>
-        </p>
-        <div id="duree_placeholder"></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calcul tiers temps</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body onload="calculduree()">
+    <h1>Calcul Tiers Temps</h1>
+    <div id="content">
+        <!-- Changement des variable début et durée. -->
+        <!-- Affichage des valeurs depuis la fonction calculduree()-->
+        <div id="calcul">
+            <p>
+                <label for="horaire_epreuve">Heure de début d'épreuve:</label>
+                <input type="time" id="horaire_epreuve" value="08:00" name="horaire_epreuve" required onchange="calculduree()">
+            </p>
+            <p>
+                <label for="duree_epreuve">Durée d'épreuve:</label>
+                <input type="time" id="duree_epreuve" value="04:00" name="duree_epreuve" required onchange="calculduree()"><a> heure(s)</a>
+                <a id="duree_epreuve_minutes"></a>
+            </p>
+            <div id="duree_placeholder"></div>
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>Details</th>
+                        <th>Valeurs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Durée du tiers temps</td>
+                        <td id="table_tiers_temps">valeur</td>
+                    </tr>
+                    <tr>
+                        <td>Durée d'épreuve + tiers temps</td>
+                        <td id="table_duree_epreuve_tiers_temps">valeur</td>
+                    </tr>
+                    <tr>
+                        <td>Heure de fin d'épreuve (sans tiers temps)</td>
+                        <td id="table_fin_epreuve">valeur</td>
+                    </tr>
+                    <tr>
+                        <td>Heure de fin d'épreuve (avec tiers temps)</td>
+                        <td id="table_fin_epreuve_tiers_temps">valeur</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><code>Attention aux surveillances pendant les pauses.</code></p>
+            
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Details</th>
-                    <th>Valeurs</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Durée du tiers temps</td>
-                    <td id="table_tiers_duree">valeur</td>
-                </tr>
-                <tr>
-                    <td>Durée d'épreuve + tiers temps</td>
-                    <td id="table_duree_epreuve_tiers_duree">valeur</td>
-                </tr>
-                <tr>
-                    <td>Heure de fin d'épreuve (sans tiers temps)</td>
-                    <td id="table_fin_epreuve">valeur</td>
-                </tr>
-                <tr>
-                    <td>Heure de fin d'épreuve (avec tiers temps)</td>
-                    <td id="table_fin_epreuve_tiers_duree">valeur</td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
-    </html>
+        <!-- Rappel + boutons raccourcis des durrée -->
+        <div id="rappel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Durée</th>
+                        <th>Tiers temps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button value="01:00" onclick="changeduree(this.value)">1h</button>
+                        </td>
+                        <td>20 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="01:30" onclick="changeduree(this.value)">1h30</button>
+                        </td>
+                        <td>30 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="02:00" onclick="changeduree(this.value)">2h</button>
+                        </td>
+                        <td>40 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="02:30" onclick="changeduree(this.value)">2h30</button>
+                        </td>
+                        <td>50 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="03:00" onclick="changeduree(this.value)">3h</button>
+                        </td>
+                        <td>60 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="03:30" onclick="changeduree(this.value)">3h30</button>
+                        </td>
+                        <td>1h10 (70 mins)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button value="04:00" onclick="changeduree(this.value)">4h</button>
+                        </td>
+                        <td>1h20 (80 mins)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Boutons raccourcis des horaires -->
+        <div id="horaire">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Heure de début d'épreuve</th>
+                        <th>+30</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button value="08:00" onclick="changehoraire(this.value)">8:00 (M1)</button>
+                        </td>
+                        <td>
+                            <button value="08:30" onclick="changehoraire(this.value)">8:30</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="09:00" onclick="changehoraire(this.value)">9:00 (M2)</button>
+                        </td>
+                        <td>
+                            <button value="09:30" onclick="changehoraire(this.value)">9:30</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="10:00" onclick="changehoraire(this.value)">10:00 (M3)</button>
+                        </td>
+                        <td>
+                            <button value="10:30" onclick="changehoraire(this.value)">10:30</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="11:00" onclick="changehoraire(this.value)">11:00 (M4)</button>
+                        </td>
+                        <td>
+                            <button value="11:30" onclick="changehoraire(this.value)">11:30</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="12:00" onclick="changehoraire(this.value)">12:00 (M5)</button>
+                        </td>
+                        <td>
+                            <button value="12:30" onclick="changehoraire(this.value)">12:30</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="13:00" onclick="changehoraire(this.value)">13:00</button>
+                        </td>
+                        <td>
+                            <button value="13:30" onclick="changehoraire(this.value)">13:30 (S1)</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="14:00" onclick="changehoraire(this.value)">14:00</button>
+                        </td>
+                        <td>
+                            <button value="14:30" onclick="changehoraire(this.value)">14:30 (S2)</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="15:00" onclick="changehoraire(this.value)">15:00</button>
+                        </td>
+                        <td>
+                            <button value="15:30" onclick="changehoraire(this.value)">15:30 (S3)</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="16:00" onclick="changehoraire(this.value)">16:00</button>
+                        </td>
+                        <td>
+                            <button value="16:30" onclick="changehoraire(this.value)">16:30 (S4)</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button value="17:00" onclick="changehoraire(this.value)">17:00</button>
+                        </td>
+                        <td>
+                            <button value="17:30" onclick="changehoraire(this.value)">17:30 (S5)</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
