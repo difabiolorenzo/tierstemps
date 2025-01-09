@@ -7,7 +7,7 @@ body {
     display: flex;
 }
 
-div#calcul, div#rappel, div#horaire {
+div#calcul, div#rappel, div#raccourcis_horaire {
     margin: 1rem;
     padding: 2rem;
     border: 1px dotted;
@@ -18,14 +18,14 @@ div#calcul, div#rappel, div#horaire {
     #content {
         display: table;
     }
-    div#calcul, div#rappel, div#horaire  {
+    div#calcul, div#rappel, div#raccourcis_horaire  {
         margin: 0.25rem;
         padding: 0.5rem;
         border: 1px dotted;
     }
 }
 
-td#table_fin_epreuve, td#table_fin_epreuve_tiers_temps {
+td#table_horaire_fin_epreuve, td#table_horaire_fin_epreuve_tiers_temps {
     background-color: #e0ffdf;
 }
 .surbrillance {

@@ -4,8 +4,8 @@ var heure_fin_pause = "13:30";
 
 function calculduree() {
     // Récupération de la valeur dans le HTML
-    var duree = document.getElementById("duree_epreuve").value;
-    var heure = document.getElementById("horaire_epreuve").value;
+    var duree = document.getElementById("input_duree_epreuve").value;
+    var heure = document.getElementById("input_horaire_epreuve").value;
 
     // Séparation de l'heure et des minutes. Création d'une variable durée additionnel du tiers temps
     var duree_epreuve_min = (parseInt(duree.split(":")[0])*60) + parseInt(duree.split(":")[1]);
@@ -18,26 +18,27 @@ function calculduree() {
     document.getElementById("duree_epreuve_minutes").innerHTML = " === " + duree_epreuve_min+" minutes";
 
     // Affichage Durée du tiers temps ; Si plus d'une heure affichage H h mm (mm mins)
-    document.getElementById("table_tiers_temps").innerHTML = duree_epreuve_tiers_temps_min + " minutes";
+    document.getElementById("table_duree_tiers_temps").innerHTML = duree_epreuve_tiers_temps_min + " minutes";
     if (duree_epreuve_tiers_temps_min >= 60) {
-        document.getElementById("table_tiers_temps").innerHTML = convertMinEnHeure(duree_epreuve_tiers_temps_min, "h") + " (" + duree_epreuve_tiers_temps_min + " mins)";  
+        document.getElementById("table_duree_tiers_temps").innerHTML = convertMinEnHeure(duree_epreuve_tiers_temps_min, "h") + " (" + duree_epreuve_tiers_temps_min + " mins)";  
     } else {
-        document.getElementById("table_tiers_temps").innerHTML = duree_epreuve_tiers_temps_min + " minutes";  
+        document.getElementById("table_duree_tiers_temps").innerHTML = duree_epreuve_tiers_temps_min + " minutes";  
     }
 
     // Affichage Durée d'épreuve + tiers temps ; Si plus d'une heure affichage H h mm (mm mins)
     var duree_epreuve_tiers_temps_global = duree_epreuve_min + duree_epreuve_tiers_temps_min          
     if (duree_epreuve_tiers_temps_global >= 60) {
-        document.getElementById("table_duree_epreuve_tiers_temps").innerHTML = convertMinEnHeure(duree_epreuve_tiers_temps_global, "h") + " (" + duree_epreuve_tiers_temps_global + " mins)";  
+        document.getElementById("table_duree_epreuve_et_tiers_temps").innerHTML = convertMinEnHeure(duree_epreuve_tiers_temps_global, "h") + " (" + duree_epreuve_tiers_temps_global + " mins)";  
     } else {
-        document.getElementById("table_duree_epreuve_tiers_temps").innerHTML = duree_epreuve_tiers_temps_global + " minutes";  
+        document.getElementById("table_duree_epreuve_et_tiers_temps").innerHTML = duree_epreuve_tiers_temps_global + " minutes";  
     }
 
     // Affichages heures de fin
     var heure_fin_epreuve = convertMinEnHeure(horaire_epreuve_fin, ":");
     var heure_fin_epreuve_tiers_temps = convertMinEnHeure(horaire_epreuve_tiers_temps_fin, ":");
-    document.getElementById("table_fin_epreuve").innerHTML = heure_fin_epreuve;
-    document.getElementById("table_fin_epreuve_tiers_temps").innerHTML = heure_fin_epreuve_tiers_temps;
+    document.getElementById("table_horaire_debut_epreuve").innerHTML = heure;
+    document.getElementById("table_horaire_fin_epreuve").innerHTML = heure_fin_epreuve;
+    document.getElementById("table_horaire_fin_epreuve_tiers_temps").innerHTML = heure_fin_epreuve_tiers_temps;
 
 
     // Mise en surbrillance de avertissement_fin_epreuve ou avertissement_fin_epreuve_tiers_temps si le temps est entre heure_debut_pause et heure_fin_pause
@@ -51,15 +52,15 @@ function calculduree() {
     var heure_fin_pause_sec = (+heure_fin_pause.split(':')[0]) * 60 * 60 + (+heure_fin_pause.split(':')[1]);
 
     if (avert_fin_epreuve_sec > heure_debut_pause_sec &&  avert_fin_epreuve_sec <= heure_fin_pause_sec) {
-        document.getElementById("table_fin_epreuve").className = "surbrillance"
+        document.getElementById("table_horaire_fin_epreuve").className = "surbrillance"
     } else {
-        document.getElementById("table_fin_epreuve").className = ""
+        document.getElementById("table_horaire_fin_epreuve").className = ""
     }
 
     if (avert_fin_epreuve_tiers_temps_sec >= heure_debut_pause_sec &&  avert_fin_epreuve_tiers_temps_sec <= heure_fin_pause_sec) {
-        document.getElementById("table_fin_epreuve_tiers_temps").className = "surbrillance"
+        document.getElementById("table_horaire_fin_epreuve_tiers_temps").className = "surbrillance"
     } else {
-        document.getElementById("table_fin_epreuve_tiers_temps").className = ""
+        document.getElementById("table_horaire_fin_epreuve_tiers_temps").className = ""
     }
 }
 
@@ -85,11 +86,11 @@ function rectMinutes(value) {
 }
 
 function changeduree(value) {
-    document.getElementById("duree_epreuve").value = value
+    document.getElementById("input_duree_epreuve").value = value
     calculduree()
 }
 
 function changehoraire(value) {
-    document.getElementById("horaire_epreuve").value = value
+    document.getElementById("input_horaire_epreuve").value = value
     calculduree()
 }

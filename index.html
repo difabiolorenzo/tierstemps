@@ -18,12 +18,12 @@
         <!-- Affichage des valeurs depuis la fonction calculduree()-->
         <div id="calcul">
             <p>
-                <label for="horaire_epreuve">Heure de début d'épreuve:</label>
-                <input type="time" id="horaire_epreuve" value="08:00" name="horaire_epreuve" required onchange="calculduree()">
+                <label for="input_horaire_epreuve">Heure de début d'épreuve:</label>
+                <input type="time" id="input_horaire_epreuve" value="08:00" name="input_horaire_epreuve" required onchange="calculduree()">
             </p>
             <p>
-                <label for="duree_epreuve">Durée d'épreuve:</label>
-                <input type="time" id="duree_epreuve" value="04:00" name="duree_epreuve" required onchange="calculduree()"><a> heure(s)</a>
+                <label for="input_duree_epreuve">Durée d'épreuve:</label>
+                <input type="time" id="input_duree_epreuve" value="04:00" name="input_duree_epreuve" required onchange="calculduree()"><a> heure(s)</a>
                 <a id="duree_epreuve_minutes"></a>
             </p>
             <div id="duree_placeholder"></div>
@@ -38,19 +38,24 @@
                 <tbody>
                     <tr>
                         <td>Durée du tiers temps</td>
-                        <td id="table_tiers_temps">valeur</td>
+                        <td id="table_duree_tiers_temps">valeur</td>
                     </tr>
                     <tr>
                         <td>Durée d'épreuve + tiers temps</td>
-                        <td id="table_duree_epreuve_tiers_temps">valeur</td>
+                        <td id="table_duree_epreuve_et_tiers_temps">valeur</td>
+                    </tr>
+                    <tr><td colspan="2">---</td></tr>
+                    <tr>
+                        <td>Heure de debut d'épreuve</td>
+                        <td id="table_horaire_debut_epreuve">valeur</td>
                     </tr>
                     <tr>
                         <td>Heure de fin d'épreuve (sans tiers temps)</td>
-                        <td id="table_fin_epreuve">valeur</td>
+                        <td id="table_horaire_fin_epreuve">valeur</td>
                     </tr>
                     <tr>
                         <td>Heure de fin d'épreuve (avec tiers temps)</td>
-                        <td id="table_fin_epreuve_tiers_temps">valeur</td>
+                        <td id="table_horaire_fin_epreuve_tiers_temps">valeur</td>
                     </tr>
                 </tbody>
             </table>
@@ -115,7 +120,7 @@
         </div>
 
         <!-- Boutons raccourcis des horaires -->
-        <div id="horaire">
+        <div id="raccourcis_horaire">
             <table>
                 <thead>
                     <tr>
